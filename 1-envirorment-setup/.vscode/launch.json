@@ -1,0 +1,18 @@
+{
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "name": "Zephyr Debug",
+            "cwd": "${workspaceFolder}",
+            "executable": "${workspaceFolder}/build/zephyr/zephyr.elf",
+            "request": "launch",
+            "type": "cortex-debug",
+            "servertype": "openocd",
+            "device": "STM32F4xx",
+            "configFiles": [
+                "${env:ZEPHYR_BASE}/boards/common/openocd-stm32.board.cmake"
+            ],
+            "runToEntryPoint": "main"
+        }
+    ]
+}
