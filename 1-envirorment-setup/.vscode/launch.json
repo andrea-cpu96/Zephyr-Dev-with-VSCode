@@ -1,18 +1,26 @@
 {
-    "version": "0.2.0",
-    "configurations": [
-        {
-            "name": "Zephyr Debug",
-            "cwd": "${workspaceFolder}",
-            "executable": "${workspaceFolder}/build/zephyr/zephyr.elf",
-            "request": "launch",
-            "type": "cortex-debug",
-            "servertype": "openocd",
-            "device": "STM32F4xx",
-            "configFiles": [
-                "${env:ZEPHYR_BASE}/boards/common/openocd-stm32.board.cmake"
-            ],
-            "runToEntryPoint": "main"
-        }
-    ]
+  "version": "0.2.0",
+  "configurations": [
+    {
+      "name": "STM32F411 Debug",
+      "device": "stm32f4x",
+      "gdbPath": "/root/zephyr-sdk-0.17.0/arm-zephyr-eabi/bin/arm-zephyr-eabi-gdb",
+      "cwd": "${workspaceRoot}",
+      "executable": "${workspaceRoot}/build/zephyr/zephyr.elf",
+      "request": "launch",
+      "type": "cortex-debug",
+      "servertype": "openocd",
+      "configFiles": [
+        "/root/zephyr-sdk-0.17.0/sysroots/x86_64-pokysdk-linux/usr/share/openocd/scripts/interface/stlink.cfg",
+        "/root/zephyr-sdk-0.17.0/sysroots/x86_64-pokysdk-linux/usr/share/openocd/scripts/target/stm32f4x.cfg"
+      ],
+      "svdFile": "/root/svd/stm32/cmsis-svd-stm32/stm32f4/STM32F411.svd",
+      "runToEntryPoint": "main",
+      "preLaunchTask": "Build",
+      "postRestartCommands": [
+        "break main",
+        "continue"
+      ],
+    }
+  ]
 }

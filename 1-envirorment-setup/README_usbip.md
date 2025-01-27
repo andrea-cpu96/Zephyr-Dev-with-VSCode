@@ -23,7 +23,7 @@ Make sure you have the following tools installed on your system:
 1. Connect the USB device to your PC's USB port.
 2. Open a command prompt with administrative privileges and list the available USB devices with the following command:
    ```sh
-   usbipd wsl list
+   usbipd list
 3. Bind the USB device with the following command:
     ```sh
     usbipd bind --busid 1-3
