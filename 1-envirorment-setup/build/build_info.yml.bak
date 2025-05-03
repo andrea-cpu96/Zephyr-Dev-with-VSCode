@@ -1,5 +1,0 @@
-west:
-  command: /home/andrea/zephyrproject/.venv/bin/west build -p always -d /home/andrea/workspace/Zephyr-Dev-with-VSCode/1-envirorment-setup/build
-    -b stm32f411e_disco /home/andrea/workspace/Zephyr-Dev-with-VSCode/1-envirorment-setup/blinky
-  topdir: /home/andrea/zephyrproject
-  version: 1.3.0
