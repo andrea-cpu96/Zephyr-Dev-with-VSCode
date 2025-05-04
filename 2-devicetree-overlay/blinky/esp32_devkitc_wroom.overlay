@@ -1,4 +1,8 @@
 / {
+
+    // NOT WORKING ON ESP32 
+    // need to use dtsi as reference for the source code
+
     aliases {
         led0 = &green_led_0;
     };
