@@ -9,28 +9,28 @@
 #include <zephyr/drivers/gpio.h>
 
 /* 1000 msec = 1 sec */
-#define SLEEP_TIME_MS 500
+#define SLEEP_TIME_MS 1000
 
-/* The devicetree node identifier for the "led0" alias. */
-#define LED0_NODE DT_NODELABEL(gpio0)
+/* The devicetree node identifier for the "onboard_led" alias. */
+#define LED0_NODE DT_ALIAS(onboard_led)
 
 /*
  * A build error on this line means your board is unsupported.
  * See the sample documentation for information on how to fix this.
  */
-static const struct device *led = DEVICE_DT_GET(LED0_NODE);
+static const struct gpio_dt_spec led = GPIO_DT_SPEC_GET(LED0_NODE, gpios);
 
 int main(void)
 {
 	int ret;
 	bool led_state = true;
 
-	if (!device_is_ready(led))
+	if (!device_is_ready(led.port))
 	{
 		return 0;
 	}
 
-	ret = gpio_pin_configure(led, 2, GPIO_OUTPUT_ACTIVE);
+	ret = gpio_pin_configure_dt(&led, GPIO_OUTPUT_ACTIVE);
 	if (ret < 0)
 	{
 		return 0;
@@ -38,7 +38,7 @@ int main(void)
 
 	while (1)
 	{
-		ret = gpio_pin_toggle(led, 2);
+		ret = gpio_pin_toggle_dt(&led);
 		if (ret < 0)
 		{
 			return 0;
