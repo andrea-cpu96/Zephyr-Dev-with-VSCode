@@ -1,0 +1,6 @@
+{
+    "cmake.sourceDirectory": "/home/andrea/workspace/Zephyr-Dev-with-VSCode/1-envirorment-setup/app",
+    "files.associations": {
+        "bitset": "c"
+    }
+}

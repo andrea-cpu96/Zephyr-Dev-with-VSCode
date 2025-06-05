@@ -1,0 +1,12 @@
+&adc1 {
+	status = "okay";
+	pinctrl-0 = <&adc1_in1_def>;
+    pinctrl-names = "default";
+	st,adc-prescaler = <2>;
+};
+
+&pinctrl {
+	adc1_in1_def: adc1_in1_def {
+		pinmux = <STM32_PINMUX('A', 0, ANALOG)>;
+	};
+};

@@ -1,0 +1,42 @@
+{
+  "version": "2.0.0",
+  "tasks": [
+    {
+      "label": "Flash",
+      "dependsOn": ["Build"],
+      "type": "shell",
+      "command": "bash",
+      "args": [
+        "-i",
+        "-c",
+        "source activate.sh && openocd -f interface/stlink.cfg -f target/stm32f4x.cfg -c \"program ${workspaceFolder}/build/zephyr/zephyr.elf verify reset; shutdown\""
+      ],
+      "options": {
+        "cwd": "${workspaceFolder}",
+        "env": {
+          "ZEPHYR_TOOLCHAIN_VARIANT": "zephyr",
+          "ZEPHYR_SDK_INSTALL_DIR": "/root"
+        }
+      },
+      "group": "build"
+    },
+    {
+      "label": "Build",
+      "type": "shell",
+      "command": "bash",
+      "args": [
+        "-i",
+        "-c",
+        "source activate.sh && west build -p always -d ${workspaceFolder}/build -b stm32f411e_disco ${workspaceFolder}/app"
+      ],
+      "options": {
+        "cwd": "${workspaceFolder}",
+        "env": {
+          "ZEPHYR_TOOLCHAIN_VARIANT": "zephyr",
+          "ZEPHYR_SDK_INSTALL_DIR": "/root"
+        },
+        "group": "build"
+      }
+    }
+  ]
+}
