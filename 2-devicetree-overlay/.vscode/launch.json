@@ -2,24 +2,35 @@
   "version": "0.2.0",
   "configurations": [
     {
-      "name": "ESP32 Debug (J-Link)",
-      "device": "ESP32",
-      "gdbPath": "/home/andrea/zephyr-sdk-0.17.0/xtensa-espressif_esp32-elf/bin/xtensa-espressif_esp32-elf-gdb",
-      "cwd": "${workspaceRoot}",
-      "executable": "${workspaceRoot}/build/zephyr/zephyr.elf",
+      "name": "ESP32 OpenOCD",
+      "type": "cppdbg",
       "request": "launch",
-      "type": "cortex-debug",
-      "servertype": "openocd",
-      "configFiles": [
-        "/home/andrea/zephyr-sdk-0.17.0/sysroots/x86_64-pokysdk-linux/usr/share/openocd/scripts/interface/jlink.cfg",
-        "/home/andrea/zephyr-sdk-0.17.0/sysroots/x86_64-pokysdk-linux/usr/share/openocd/scripts/target/esp32.cfg"
+      "miDebuggerPath": "/home/andrea/zephyr-sdk-0.17.0/xtensa-espressif_esp32_zephyr-elf/bin/xtensa-espressif_esp32_zephyr-elf-gdb",
+      "cwd": "/home/andrea/workspace/Zephyr-Dev-with-VSCode/2-devicetree-overlay/build",
+      "program": "/home/andrea/workspace/Zephyr-Dev-with-VSCode/2-devicetree-overlay/build/zephyr/zephyr.elf",
+      "debugServerArgs": "-f /home/andrea/zephyr-sdk-0.17.0/sysroots/x86_64-pokysdk-linux/usr/share/openocd/scripts/interface/ftdi/esp_ftdi.cfg -f /home/andrea/zephyr-sdk-0.17.0/sysroots/x86_64-pokysdk-linux/usr/share/openocd/scripts/target/esp32.cfg",
+      "serverStarted": "Info :",
+      "setupCommands": [
+        {
+          "description": "Enable pretty-printing for gdb",
+          "text": "-enable-pretty-printing",
+          "ignoreFailures": true
+        },
+        {
+          "text": "target remote :3333"
+        },
+        {
+          "text": "monitor reset halt"
+        },
+        {
+          "text": "flushregs"
+        },
+        {
+          "text": "set debug remote 1"
+        }
       ],
-      "runToEntryPoint": "main",
       "preLaunchTask": "Build",
-      "postRestartCommands": [
-        "break main",
-        "continue"
-      ]
+      "externalConsole": true
     }
   ]
 }
